@@ -1,0 +1,95 @@
+<mat-card class="">
+      <mat-card-title><mat-icon>cloud</mat-icon> Current Weather</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content class="layout-card">
+        <h1 class="center" *ngIf='resultFound()'>{{currentWeather.name}}</h1>
+        <table class="table table-hover table-sm table-striped" *ngIf='resultFound()'>
+          <tbody>
+          <tr>
+            <td>
+              <img class="" src="https://openweathermap.org/img/w/{{currentWeather.weather[0].icon}}.png" alt="">
+            </td>
+            <td>
+              {{currentWeather.weather[0].main }} - {{currentWeather?.weather[0].description}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Temperature:</b>
+            </td>
+            <td>
+              {{currentWeather.main?.temp | number:'1.0-0'}}<sup>o</sup>F
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Hi Temp:</b>
+            </td>
+            <td>
+              {{currentWeather.main?.temp | number:'1.0-0'}}<sup>o</sup>F
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Lo Temp:</b>
+            </td>
+            <td>
+              {{currentWeather.main?.temp_min  | number:'1.0-0'}}<sup>o</sup>F
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Clouds:</b>
+            </td>
+            <td>
+              {{currentWeather.clouds?.all}}%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Humidity:</b>
+            </td>
+            <td>
+              {{currentWeather.main?.humidity}}%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Pressure:</b>
+            </td>
+            <td>
+              {{currentWeather.main?.pressure}}mb
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Sunrise:</b>
+            </td>
+            <td>
+              {{currentWeather.sys?.sunrise*1000 | date:'MM/dd/yyy hh:mm a'}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Sunset:</b>
+            </td>
+            <td>
+              {{currentWeather.sys?.sunset*1000 | date:'MM/dd/yyy hh:mm a'}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Visibility:</b>
+            </td>
+            <td>
+              {{currentWeather.visibility}}m
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf='!resultFound()'>
+          <h1 class="center">{{msg || 'Failed to get weather.'}}</h1>
+        </div>
+      </mat-card-content>
+</mat-card>
+

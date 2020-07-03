@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-12">
+    <mat-card class="">
+      <mat-card-title><mat-icon>pin_drop</mat-icon> Location Search</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content class="layout-card">
+        <div class="row">
+          <div class="col-md-5">
+          <mat-form-field appearance="outline">
+            <mat-label class="center">Search Location</mat-label>
+            <input matInput
+                   placeholder="Enter Address"
+                   autocorrect="off"
+                   autocapitalize="off"
+                   spellcheck="off"
+                   type="text"
+                   id="searchAddress"
+                   #search
+                   [formControl]="searchControl">
+            <mat-icon matSuffix>my_location</mat-icon>
+            <mat-hint>Example: 1600 Pennsylvania Avenue, Washington, D.C.</mat-hint>
+          </mat-form-field>
+        </div>
+        </div>
+        <div class="row" *ngIf="selectedLocation">
+          <div class="col-md-3">
+            <mat-form-field appearance="outline">
+              <mat-label class="center">Weather Overlay</mat-label>
+              <mat-select class=""
+                          [ngModel]="selectedWeatherLayer"
+                          (selectionChange) = 'addWeatherLayer($event)'>
+                <mat-option disabled>
+                  Select Overlay:
+                </mat-option>
+                <mat-option
+                  *ngFor="let layer of mapWeatherLayers"
+                  [value]="layer.layer_value">
+                  {{layer.shape_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2">
+            <div *ngIf="weatherLayerOn">
+              <div class="btn-group mrg-left-10 mrg-top-5">
+                <button type="button" class="btn btn-danger btn-rounded"
+                        (click) = 'removeWeatherLayer()'>
+                  <mat-icon>highlight_off</mat-icon> Overlay
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+            <agm-map #map (mapReady)="onMapReady($event)" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+              <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+            </agm-map>
+          </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div class="row mrg-top-20">
+    <div class="col-md-3" *ngIf="selectedLocation">
+      <app-current-weather [selectedLocation]="selectedLocation"></app-current-weather>
+    </div>
+  <div class="col-md-4" *ngIf="selectedLocation">
+    <app-forecast [selectedLocation]="selectedLocation"></app-forecast>
+  </div>
+  <div class="col-md-5" *ngIf="selectedLocation">
+    <app-forecast-day [selectedLocation]="selectedLocation"></app-forecast-day>
+  </div>
+</div>
+

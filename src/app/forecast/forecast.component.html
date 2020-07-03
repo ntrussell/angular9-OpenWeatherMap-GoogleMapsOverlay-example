@@ -1,0 +1,69 @@
+<mat-card class="sc">
+  <mat-card-title><mat-icon>schedule</mat-icon> 3-Hour Forecast</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content class="layout-card" style="height: 450px; overflow-y: auto">
+    <div *ngIf='resultFound()'>
+      <div class="" *ngFor='let l of forecast.list'>
+        <p><b>{{l.dt*1000 | date:'MMM d, y, h:mm:ss a'}}</b></p>
+        <div class="table-responsive" *ngIf='resultFound()'>
+          <table class="table table-hover table-sm table-striped">
+            <tbody>
+            <tr>
+              <td>
+                <img class="" src="https://openweathermap.org/img/w/{{l.weather[0]?.icon}}.png" alt="">
+              </td>
+              <td *ngFor='let w of l.weather'>
+                {{w?.main }} - {{w?.description }}
+              </td>
+            </tr>
+            <tr>
+              <td><b>Temperature:</b></td>
+              <td>{{l.main?.temp | number:'1.0-0'}}<sup>o</sup>F</td>
+            </tr>
+            <tr>
+              <td><b>Feels Like:</b></td>
+              <td>{{l.main?.feels_like | number:'1.0-0'}}<sup>o</sup>F</td>
+            </tr>
+            <tr>
+              <td><b>Lo Temp:</b></td>
+              <td>{{l.main?.temp_min | number:'1.0-0'}}<sup>o</sup>F</td>
+            </tr>
+            <tr>
+              <td><b>Hi Temp:</b></td>
+              <td>{{l.main?.temp_max | number:'1.0-0'}}<sup>o</sup>F</td>
+            </tr>
+            <tr>
+              <td><b>Pressure:</b></td>
+              <td>{{l.main?.pressure | number:'1.0-0'}}mb</td>
+            </tr>
+            <tr>
+              <td><b>Sea Level:</b></td>
+              <td>{{l.main?.sea_level | number:'1.0-0'}}m</td>
+            </tr>
+            <tr>
+              <td><b>Ground Level:</b></td>
+              <td>{{l.main?.grnd_level | number:'1.0-0'}}m</td>
+            </tr>
+            <tr>
+              <td><b>Humidity:</b></td>
+              <td> {{l.main?.humidity | number:'1.0-0'}}%</td>
+            </tr>
+            <tr>
+              <td><b>Wind Speed:</b></td>
+              <td>{{l.wind?.speed }}MPH</td>
+            </tr>
+            <tr>
+              <td><b>Wind Direction</b></td>
+              <td>{{l.wind?.deg }}<sup>o</sup></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf='!resultFound()'>
+      <h1 class="center">{{msg || 'Failed to get weather.'}}</h1>
+    </div>
+  </mat-card-content>
+</mat-card>
+

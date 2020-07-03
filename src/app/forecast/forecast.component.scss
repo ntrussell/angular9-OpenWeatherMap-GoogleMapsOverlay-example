@@ -1,0 +1,13 @@
+.mat-card.scrollable-content {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  > .mat-card-title-group {
+    display: block;
+  }
+
+  > .mat-card-content {
+    overflow-y: auto;
+  }
+}

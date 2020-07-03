@@ -1,0 +1,21 @@
+.mat-form-field {
+  width: 100%;
+}
+agm-map {
+  height: 400px !important;
+  width: 100%;  /* This is really important*/
+}
+.weatherFilter{
+  float: left;
+  width: 100%;
+  border: 1px solid #000;
+  height: 40px;
+}
+.filterTitle{
+  float: left;
+}
+ng-multiselect-dropdown{
+  width: 150px;
+  float: left;
+  max-height: 40px;
+}
